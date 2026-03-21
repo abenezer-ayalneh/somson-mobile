@@ -1,0 +1,27 @@
+{
+	"somson": "Somson",
+	"skip": "Skip",
+	"onboarding": {
+		"contents": {
+			"first": {
+				"title": "Track Your Routines",
+				"subtitle": "Organize your workouts into personalized routines that match your goals."
+			},
+			"second": {
+				"title": "Welcome to Somson",
+				"subtitle": "Organize your workouts into personalized routines that match your goals."
+			},
+			"third": {
+				"title": "Welcome to Somson",
+				"subtitle": "Organize your workouts into personalized routines that match your goals."
+			},
+			"fourth": {
+				"title": "Welcome to Somson",
+				"subtitle": "Organize your workouts into personalized routines that match your goals."
+			}
+		},
+		"step": "Step {{current}} of {{total}}",
+		"continue": "Continue",
+		"finish": "Let's Go"
+	}
+}

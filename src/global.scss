@@ -38,3 +38,15 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import '@ionic/angular/css/palettes/dark.system.css'; */
 @import '@ionic/angular/css/palettes/dark.class.css';
+
+// Global styles
+body {
+	width: 100vw;
+	height: 100vh;
+}
+
+// Safe area
+ion-content::part(scroll) {
+	padding-top: var(--ion-safe-area-top, 0); // For portrait
+	padding-left: var(--ion-safe-area-left, 0); // For landscape
+}
