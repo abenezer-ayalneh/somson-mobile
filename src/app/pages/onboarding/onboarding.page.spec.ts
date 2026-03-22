@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { provideRouter } from '@angular/router'
+import { TranslateModule } from '@ngx-translate/core'
 
 import { OnboardingPage } from './onboarding.page'
 
@@ -6,7 +8,12 @@ describe('OnboardingPage', () => {
 	let component: OnboardingPage
 	let fixture: ComponentFixture<OnboardingPage>
 
-	beforeEach(() => {
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [OnboardingPage, TranslateModule.forRoot()],
+			providers: [provideRouter([])],
+		}).compileComponents()
+
 		fixture = TestBed.createComponent(OnboardingPage)
 		component = fixture.componentInstance
 		fixture.detectChanges()
