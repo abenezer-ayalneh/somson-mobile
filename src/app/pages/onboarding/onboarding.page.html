@@ -1,9 +1,10 @@
 <ion-content [fullscreen]="true">
 	<div class="h-full flex flex-col">
 		<div class="w-full flex justify-between items-center p-4">
+			<!--			<p class="font-black text-xl">Somson</p>-->
 			<p class="font-black text-xl">{{ 'somson' | translate }}</p>
-			<ion-buttons slot="end" (click)="skip()">
-				<ion-button size="small" color="secondary">{{ 'skip' | translate }}</ion-button>
+			<ion-buttons slot="end">
+				<ion-button (click)="skip()" size="small" color="secondary">{{ 'skip' | translate }}</ion-button>
 			</ion-buttons>
 		</div>
 
@@ -22,7 +23,7 @@
 				<div class="w-full h-fit flex flex-col gap-6">
 					<div class="w-full h-fit flex justify-start items-center gap-2 landscape:pb-4">
 						@for (page of ONBOARDING_PAGES; track page.id; let index = $index) {
-							<button (click)="changePageTo(index)">
+							<button (click)="changePageTo(index)" act>
 								<div
 									[ngClass]="{
 										'w-8 bg-(--ion-color-primary)': activePageIndex() === index,
