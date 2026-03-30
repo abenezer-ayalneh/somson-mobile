@@ -11,17 +11,17 @@ export class Theme {
 	init() {
 		// Initialize the dark palette based on
 		// the user saved preference or the initial value of the prefers-color-scheme media query
-		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+		const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
 
 		if (localStorage.getItem(THEME)) {
 			this.initializeDarkPalette(Boolean(localStorage.getItem(THEME) === 'dark'))
 		} else {
 			// Use matchMedia to check the user preference
-			this.initializeDarkPalette(prefersDark.matches)
+			this.initializeDarkPalette(mediaQueryList.matches)
 		}
 
 		// Listen for changes to the prefers-color-scheme media query
-		prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
+		mediaQueryList.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches))
 	}
 
 	toggle() {
@@ -31,13 +31,13 @@ export class Theme {
 	}
 
 	// Add or remove the "ion-palette-dark" class on the html element
-	protected toggleDarkPalette(theme: 'light' | 'dark') {
+	private toggleDarkPalette(theme: 'light' | 'dark') {
 		document.documentElement.classList.toggle('ion-palette-dark', theme === 'dark')
 		localStorage.setItem(THEME, theme)
 	}
 
 	// Check/uncheck the toggle and update the palette based on isDark
-	protected initializeDarkPalette(isDarkPreferred: boolean) {
+	private initializeDarkPalette(isDarkPreferred: boolean) {
 		this.theme.set(isDarkPreferred ? 'dark' : 'light')
 		this.toggleDarkPalette(isDarkPreferred ? 'dark' : 'light')
 	}

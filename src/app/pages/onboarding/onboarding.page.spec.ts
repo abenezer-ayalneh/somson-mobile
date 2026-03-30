@@ -73,48 +73,38 @@ const getActiveIndicatorIndex = (container: HTMLElement): number => {
 	return indicatorButtons.findIndex((button) => button.firstElementChild?.classList.contains('w-8'))
 }
 
-const renderOnboardingPage = async () => {
-	const navigate = vi.fn().mockResolvedValue(true)
-
-	const renderResult = await render(OnboardingPage, {
-		imports: [
-			IonicModule.forRoot(),
-			TranslateModule.forRoot({
-				loader: {
-					provide: TranslateLoader,
-					useClass: TranslationTestingLoader,
-				},
-				fallbackLang: 'en',
-				lang: 'en',
-			}),
-		],
-		providers: [
-			{
-				provide: Router,
-				useValue: { navigate },
-			},
-		],
-	})
-
-	// TranslatePipe updates after the loader Observable completes; first render may still show the key.
-	const translate = TestBed.inject(TranslateService)
-	await firstValueFrom(translate.use('en'))
-	renderResult.fixture.detectChanges()
-
-	return {
-		...renderResult,
-		navigate,
-	}
-}
-
 describe('OnboardingPage', () => {
 	let container: HTMLElement
 	let navigate: Mock
 
 	beforeEach(async () => {
-		const { container: renderedContainer, navigate: mockedNavigate } = await renderOnboardingPage()
-		container = renderedContainer
-		navigate = mockedNavigate
+		navigate = vi.fn().mockResolvedValue(true)
+
+		const renderResult = await render(OnboardingPage, {
+			imports: [
+				IonicModule.forRoot(),
+				TranslateModule.forRoot({
+					loader: {
+						provide: TranslateLoader,
+						useClass: TranslationTestingLoader,
+					},
+					fallbackLang: 'en',
+					lang: 'en',
+				}),
+			],
+			providers: [
+				{
+					provide: Router,
+					useValue: { navigate },
+				},
+			],
+		})
+
+		// TranslatePipe updates after the loader Observable completes; first render may still show the key.
+		const translate = TestBed.inject(TranslateService)
+		await firstValueFrom(translate.use('en'))
+		renderResult.fixture.detectChanges()
+		container = renderResult.container
 	})
 
 	it('renders app name, skip button, image, first page content, indicators, and continue button', async () => {
